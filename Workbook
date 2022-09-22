@@ -1,0 +1,130 @@
+Hello HTML // Hello React
+
+const render = () => {
+  document.getElementById('mountNode').innerHTML = `
+    <div>
+      Hello HTML
+      <input />
+      <pre>${new Date().toLocaleTimeString()}</pre>
+    </div>
+  `;
+
+  ReactDOM.render(
+    React.createElement(
+      'div',
+      null,
+      'Hello React',
+      React.createElement('input', null),
+      React.createElement('pre', null, new Date().toLocaleTimeString())
+    ),
+    document.getElementById('mountNode2')
+  );
+};
+
+setInterval(render, 1000);
+
+CSS:
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.mountNode > div {
+  border: 1px solid #888;
+  margin: 1em;
+  padding: 1em;
+}
+
+.mountNode input {
+  display: block;
+  margin: 1rem 0;
+}
+
+.mountNode pre {
+  background-color: inherit;
+}
+
+///////////////////////////////
+
+Increment buttons (+1/+5/+10)
+
+const Button = ({clickValue, clickAction}) => {
+  return (
+    <button onClick = {() => clickAction(clickValue)}>
+      +{clickValue}
+    </button>
+  );
+};
+
+const Display = ({content}) => (
+  <pre> {content} </pre>
+)
+
+  
+  const [count, setCount] = useState(0);
+  
+  const incrementCounter = (increment) => {
+    setCount(count +increment);
+  };
+  return (
+    <>
+      <Button clickAction = {incrementCounter} clickValue ={1}/>
+      <Button clickAction = {incrementCounter} clickValue ={5}/>
+      <Button clickAction = {incrementCounter} clickValue ={10}/>
+      <Display content = {count} />
+    </>
+  );
+};
+
+ReactDOM.render(<CountManager />, mountNode);
+
+CSS:
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+.mountNode > div {
+  border: 1px solid #888;
+  margin: 1em;
+  padding: 1em;
+}
+
+.mountNode input {
+  display: block;
+  margin: 1rem 0;
+}
+
+.mountNode pre {
+  background-color: inherit;
+}
+
+///////////////////////////////
+Textarea with counter 
+
+const CharacterCounter = () => {
+  const [count, setCount] =
+        useState(0);
+  
+  const handleChange = (event) => {
+    const element = event.target;
+    setCount(element.value.length);
+  };
+  
+  return (
+    <div>
+      <textarea cols ={80} rows = {10}
+        onChange={handleChange} />
+      <div> Count: {count}</div> 
+    </div>
+  );
+};
+
+ReactDOM.render(<CharacterCounter/>, mountNode);
+
+CSS: 
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+#mountNode {
+  padding-top: 1rem;
+}
